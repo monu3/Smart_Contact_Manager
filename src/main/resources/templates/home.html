@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Contact Manager</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+          rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{'/CSS/output.css'}">
+</head>
+<body>
+
+<div class="bg-gray-300 w-1/2 p-3 mx-auto">
+
+    <h1 class="text-blue-800" th:text="${ProjectName}"></h1>
+
+    <p>The owner of the projects : <span th:text="${name}"></span> </p>
+
+    <a th:href="${gitHub}">Click here to go My GitHub</a>
+
+    <p>This is a contact manager web application to make your
+        contact easy to save and import to the Excel and pdf as like you want. </p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+</html>
