@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"  th:replace="~{fragments/fragment :: parent(~{::#sign_up},~{::title},~{::script})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign_up Page</title>
+</head>
+<body>
+<div id="sign_up">
+    <br>
+    <div class="grid grid-cols-12">
+        <div class="col-span-4 md:col-span-2 lg:col-span-3 xl:col-span-4"></div>
+<!--        cards-->
+        <div class="col-span-4 md:col-span-8 lg:col-span-6 xl:col-span-4">
+
+            <div class="block p-6 bg-white border-t-8 border-blue-700 rounded-xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-blue-700 dark:hover:bg-gray-700">
+
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Sign Up</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">
+                    This is the Sign up page ....You can sign up here !</p>
+
+
+
+
+            <form action="" class="max-w-sm mx-auto">
+<!--                userName-->
+                <div class="mb-5">
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User Name</label>
+                    <input type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
+                </div>
+<!--                    Email-->
+                <div class="mb-5">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                    <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" required />
+                </div>
+<!--                password-->
+                <div class="mb-5">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                </div>
+<!--                contact number-->
+                <div class="mb-5">
+                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
+                    <input type="text"
+                           id="phone"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
+                </div>
+
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            </form>
+            </div>
+
+        </div>
+
+        <div class="col-span-4"></div>
+    </div>
+
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  th:replace="~{fragments/fragment :: parent(~{::#home},~{::title},~{::script})}">
 <head>
     <meta charset="UTF-8">
     <title>Smart Contact Manager</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
-          rel="stylesheet" />
-    <link rel="stylesheet" th:href="@{'/CSS/output.css'}">
 </head>
 <body>
 
-<div class="bg-gray-300 w-1/2 p-3 mx-auto">
+<div id="home">
+
 
     <h1 class="text-blue-800" th:text="${ProjectName}"></h1>
 
@@ -21,6 +19,10 @@
         contact easy to save and import to the Excel and pdf as like you want. </p>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+<script>
+
+</script>
+
 </body>
 </html>
