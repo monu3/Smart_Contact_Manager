@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
+    @RequestMapping("/")
+    public String index() {
+        return "redirect:/home";
+    }
+
     @RequestMapping("/home")
     public String home(Model model) {
 
@@ -36,11 +41,6 @@ public class HomeController {
     @GetMapping("/login")
     public String loginPage(Model model) {
         return "login";
-    }
-
-    @GetMapping("/sign_up")
-    public String sign_upPage(Model model) {
-        return "sign_up";
     }
 
     @GetMapping("/contact")
