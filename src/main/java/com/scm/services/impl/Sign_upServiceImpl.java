@@ -54,7 +54,7 @@ public class Sign_upServiceImpl implements Sign_upService {
         updateUser.setPassword(user.getPassword());
         updateUser.setPhone(user.getPhone());
         updateUser.setProfilePicture(user.getProfilePicture());
-        updateUser.setPhoneVerified(user.isPhoneVerified());
+        updateUser.setEmailVerified(user.isEmailVerified());
         updateUser.setProvider(user.getProvider());
         updateUser.setProviderUserId(user.getProviderUserId());
 

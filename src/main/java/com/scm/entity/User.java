@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String email;
     private String profilePicture;
     private String phone;
-    private boolean phoneVerified;
+    private boolean emailVerified;
     //facebook,GitHub,google
     @Enumerated(value = EnumType.STRING)
     private Providers provider=Providers.SELF;

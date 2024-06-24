@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+    private final OAuthAuthenticationSuccessHandler oAuthAuthenticationSuccessHandler;
+
 
     //create user and login using database user
 
@@ -44,42 +48,61 @@ public class SecurityConfig {
 
     private final SecurityCustomUserDetailsService userDetailsService;
 
-    public SecurityConfig(SecurityCustomUserDetailsService userDetailsService) {
+    public SecurityConfig(OAuthAuthenticationSuccessHandler oAuthAuthenticationSuccessHandler, SecurityCustomUserDetailsService userDetailsService) {
+        this.oAuthAuthenticationSuccessHandler = oAuthAuthenticationSuccessHandler;
         this.userDetailsService = userDetailsService;
     }
 
-        @Bean
-        public AuthenticationProvider authenticationProvider() {
-            DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-            authenticationProvider.setUserDetailsService(userDetailsService);
-            authenticationProvider.setPasswordEncoder(passwordEncoder());
-            return authenticationProvider;
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
 
-        }
+    }
 
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         //give special permission to the https request mapping in our application
-            httpSecurity.authorizeHttpRequests((authorizeRequests) -> {
+        httpSecurity.authorizeHttpRequests((authorizeRequests) -> {
 //               authorizeRequests.requestMatchers("/home","/sign_up","/about","/services").permitAll();
-                authorizeRequests.requestMatchers("/user/**").authenticated();
-                authorizeRequests.anyRequest().permitAll();
-            });
+            authorizeRequests.requestMatchers("/user/**").authenticated();
+            authorizeRequests.anyRequest().permitAll();
+        });
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        //form default login
+        //if anyone things want to change something in login form come here and change
+        httpSecurity.formLogin(formLogin -> {
+            formLogin.loginPage("/login");
+            formLogin.loginProcessingUrl("/authenticate");
+            formLogin.successForwardUrl("/user/dashboard");
+            formLogin.failureUrl("/login?error=true");
+            formLogin.usernameParameter("email");
+            formLogin.passwordParameter("password");
+        });
 
-            //form default login
-            //if onethings want to change something in login form come here and change
-            httpSecurity.formLogin(Customizer.withDefaults());
-            return httpSecurity.build();
+        //customize for form logout
+        httpSecurity.logout(logout -> {
+            logout.logoutUrl("/logout");
+            logout.logoutSuccessUrl("/login?logout=true");
+        });
 
-        }
+
+        //oauth client configure
+        httpSecurity.oauth2Login(oauth2Login -> {
+            oauth2Login.loginPage("/login");
+            oauth2Login.successHandler(oAuthAuthenticationSuccessHandler);
+        });
+
+        return httpSecurity.build();
+    }
 
 
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
-        }
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 
 }
